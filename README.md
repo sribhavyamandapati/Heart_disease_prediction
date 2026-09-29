@@ -368,7 +368,7 @@ The application processes the input using the same preprocessing pipeline used d
 
 The Heart Disease Prediction application is deployed using **Render**.
 
-🔗 **https://heart-predection-1-qrfo.onrender.com**
+🔗 ** https://heart-disease-prediction-1-lkz4.onrender.com**
 
 
 ```
