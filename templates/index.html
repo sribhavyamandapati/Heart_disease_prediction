@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Vihara Tech - Heart Disease Prediction</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f7fb;
+            min-height: 100vh;
+        }
+
+        /* ---------------- HEADER ---------------- */
+
+        .header {
+            background: #172b4d;
+            color: white;
+            text-align: center;
+            padding: 22px 10px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+        /* ---------------- MAIN ---------------- */
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 35px auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .title h2 {
+            color: #172b4d;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #666;
+            font-size: 15px;
+        }
+
+        /* ---------------- FORM CARD ---------------- */
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #172b4d;
+        }
+
+        /* ---------------- SEX BUTTONS ---------------- */
+
+        .sex-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .sex-buttons input {
+            display: none;
+        }
+
+        .sex-buttons label {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: normal;
+            background: white;
+        }
+
+        .sex-buttons input:checked + label {
+            background: #172b4d;
+            color: white;
+            border-color: #172b4d;
+        }
+
+        /* ---------------- BUTTON ---------------- */
+
+        .predict-button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #172b4d;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .predict-button:hover {
+            background: #0e1d35;
+        }
+
+        /* ---------------- RESULT ---------------- */
+
+        .result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            background: #eef3f8;
+        }
+
+        .result h3 {
+            color: #172b4d;
+            margin-bottom: 8px;
+        }
+
+        .result p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* ---------------- FOOTER ---------------- */
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* ---------------- MOBILE ---------------- */
+
+        @media(max-width: 650px) {
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+
+            .title h2 {
+                font-size: 23px;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>VIHARA TECH</h1>
+
+        <p>Machine Learning Based Healthcare Application</p>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+        <div class="title">
+
+            <h2>Heart Disease Prediction</h2>
+
+            <p>
+                Enter the patient's clinical information
+                to predict heart disease.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <form action="/predict" method="POST">
+
+                <div class="form-grid">
+
+                    <!-- AGE -->
+
+                    <div class="form-group">
+
+                        <label for="age">
+                            Age
+                        </label>
+
+                        <input
+                            type="number"
+                            id="age"
+                            name="age"
+                            min="1"
+                            max="120"
+                            step="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- SEX -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Sex
+                        </label>
+
+                        <div class="sex-buttons">
+
+                            <input
+                                type="radio"
+                                id="male"
+                                name="sex"
+                                value="Male"
+                                required
+                            >
+
+                            <label for="male">
+                                Male
+                            </label>
+
+
+                            <input
+                                type="radio"
+                                id="female"
+                                name="sex"
+                                value="Female"
+                            >
+
+                            <label for="female">
+                                Female
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CP -->
+
+                    <div class="form-group">
+
+                        <label for="cp">
+                            Chest Pain Type (CP)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="cp"
+                            name="cp"
+                            min="0"
+                            max="3"
+                            step="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- THALACH -->
+
+                    <div class="form-group">
+
+                        <label for="thalach">
+                            Maximum Heart Rate (Thalach)
+                        </label>
+
+                        <input
+                            type="number"
+                            id="thalach"
+                            name="thalach"
+                            min="50"
+                            max="250"
+                            step="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- OLDPEAK -->
+
+                    <div class="form-group">
+
+                        <label for="oldpeak">
+                            Oldpeak
+                        </label>
+
+                        <input
+                            type="number"
+                            id="oldpeak"
+                            name="oldpeak"
+                            min="0"
+                            max="10"
+                            step="0.1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- SLOPE -->
+
+                    <div class="form-group">
+
+                        <label for="slope">
+                            Slope
+                        </label>
+
+                        <input
+                            type="number"
+                            id="slope"
+                            name="slope"
+                            min="0"
+                            max="2"
+                            step="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- THAL -->
+
+                    <div class="form-group">
+
+                        <label for="thal">
+                            Thal
+                        </label>
+
+                        <input
+                            type="number"
+                            id="thal"
+                            name="thal"
+                            min="0"
+                            max="3"
+                            step="1"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PREDICT BUTTON -->
+
+                <button
+                    type="submit"
+                    class="predict-button"
+                >
+                    Predict Heart Disease
+                </button>
+
+            </form>
+
+
+            <!-- RESULT -->
+
+            {% if prediction %}
+
+            <div class="result">
+
+                <h3>Prediction Result</h3>
+
+                <p>{{ prediction }}</p>
+
+                {% if probability %}
+
+                <p>
+                    Confidence: {{ probability }}%
+                </p>
+
+                {% endif %}
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- FOOTER -->
+
+        <div class="footer">
+
+            <p>
+                Machine Learning Project
+            </p>
+
+            <p>
+                Project Done By Sri Bhavya
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
